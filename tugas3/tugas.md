@@ -1,0 +1,5 @@
+![Teks Alternatif](Checkin.png "checkin")
+![Teks Alternatif](Checkindua.png "checkin2")
+![Teks Alternatif](Checkout.png "checkout")
+![Teks Alternatif](Checkoutdua.png "checkout2")
+![Teks Alternatif](Reports.png "reportdaily")
