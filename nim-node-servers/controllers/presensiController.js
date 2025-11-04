@@ -1,5 +1,5 @@
  	// 1. Ganti sumber data dari array ke model Sequelize
- 	const { Presensi } = require('../../models');
+ 	const { presensi: Presensi } = require('../models');
  	const { format } = require("date-fns-tz");
  	const timeZone = "Asia/Jakarta";
  	
