@@ -33,4 +33,5 @@ router.put(
   presensiController.updatePresensi 
 );
 
+router.get("/", presensiController.getAllPresensi);
 module.exports = router;

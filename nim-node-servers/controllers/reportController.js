@@ -1,4 +1,4 @@
-const { presensi: Presensi } = require("../models");
+const { Presensi } = require('../models');
 const { Op } = require("sequelize");
 
 exports.getDailyReport = async (req, res) => {

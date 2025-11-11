@@ -1,6 +1,6 @@
 // MODIFIKASI: Impor validationResult
 const { validationResult } = require('express-validator'); 
-const { presensi: Presensi } = require('../models');
+const { Presensi } = require('../models');
 const { format } = require("date-fns-tz");
 const timeZone = "Asia/Jakarta";
 
@@ -149,6 +149,22 @@ exports.updatePresensi = async (req, res) => {
     res.json({
       message: "Data presensi berhasil diperbarui.",
       data: recordToUpdate,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Terjadi kesalahan pada server", error: error.message });
+  }
+};
+
+exports.getAllPresensi = async (req, res) => {
+  try {
+    // Ambil semua data presensi dari database
+    const records = await Presensi.findAll();
+    
+    res.json({
+      message: "Berhasil mengambil semua data presensi.",
+      data: records,
     });
   } catch (error) {
     res
