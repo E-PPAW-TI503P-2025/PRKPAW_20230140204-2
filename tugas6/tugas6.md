@@ -1,11 +1,11 @@
 ## 1. Request POST /register (Mahasiswa)
-![Register Mahasiswa](tugas6/Screenshot%202025-11-11%20155657.png)
+![Register Mahasiswa](tugas6/register-mahasiswa.png)
 
 ## 2. Request POST /register (Admin)
-![Register Admin](tugas6/Screenshot%202025-11-11%20155820.png)
+![Register Admin](tugas6/register-admin.png)
 
 ## 3. Request POST /login (Mahasiswa)
-![Login Mahasiswa](tugas6/Screenshot%202025-11-11%20160012.png)
+![Login Mahasiswa](tugas6/login.png)
 
 ## 4. Database Table User
-![Database Table](tugas6/Screenshot%202025-11-11%20160143.png)
+![Database Table](tugas6/database.png)
