@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Presensi extends Model {
    
     static associate(models) {
-     
+     this.belongsTo(models.User, { foreignKey: 'userId' });
     }
   }
   Presensi.init({
