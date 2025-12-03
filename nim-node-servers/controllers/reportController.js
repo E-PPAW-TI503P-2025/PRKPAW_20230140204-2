@@ -1,32 +1,36 @@
-const { Presensi } = require('../models');
-const { Op } = require("sequelize");
+// nim-node-servers/controllers/reportController.js
+const { User, Presensi } = require('../models'); // <-- WAJIB IMPORT KEDUA MODEL INI!
+const { Op } = require('sequelize');
 
 exports.getDailyReport = async (req, res) => {
-  try {
-    const { nama, tanggalMulai, tanggalSelesai } = req.query;
-    let options = { where: {} };
+    try {
+        // Logika query pencarian
+        const { nama } = req.query;
+        let userCondition = {};
+        if (nama) {
+            userCondition = {
+                nama: { [Op.like]: `%${nama}%` }
+            };
+        }
 
-    if (nama) {
-      options.where.nama = {
-        [Op.like]: `%${nama}%`,
-      };
+        const reports = await Presensi.findAll({
+            // INI KUNCINYA: Menggabungkan data User
+            include: [{
+                model: User,
+                as: 'user', 
+                attributes: ['nama', 'email'], 
+                where: userCondition 
+            }],
+            order: [['checkIn', 'DESC']]
+        });
+
+        res.status(200).json({
+            status: "success",
+            // Mengirim data ke Frontend
+            data: reports
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Gagal mengambil laporan" });
     }
-
-    if (tanggalMulai && tanggalSelesai) {
-      options.where.checkIn = {
-        [Op.between]: [tanggalMulai, tanggalSelesai],
-      };
-    }
-
-    const records = await Presensi.findAll(options);
-
-    res.json({
-      reportDate: new Date().toLocaleDateString(),
-      data: records,
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Gagal mengambil laporan", error: error.message });
-  }
 };

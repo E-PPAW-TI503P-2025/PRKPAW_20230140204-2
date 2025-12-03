@@ -1,34 +1,40 @@
+// models/presensi.js
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Presensi extends Model {
-   
     static associate(models) {
-     this.belongsTo(models.User, { foreignKey: 'userId' });
+      // Relasi ke User
+      Presensi.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
     }
   }
+  
   Presensi.init({
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    nama: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    // HAPUS BAGIAN 'nama' DARI SINI
     checkIn: {
       type: DataTypes.DATE,
       allowNull: false,
     },
     checkOut: {
-      type: DataTypes.DATE,
-      allowNull: true, // Boleh null
+      type: DataTypes.DATE
+    },
+    latitude: {
+      type: DataTypes.DECIMAL(10, 8),
+      allowNull: true
+    },
+    longitude: {
+      type: DataTypes.DECIMAL(11, 8),
+      allowNull: true
     }
   }, {
     sequelize,
     modelName: 'Presensi',
   });
+  
   return Presensi;
 };
