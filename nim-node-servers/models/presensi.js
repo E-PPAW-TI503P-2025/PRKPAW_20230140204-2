@@ -1,11 +1,10 @@
-// models/presensi.js
 'use strict';
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Presensi extends Model {
     static associate(models) {
-      // Relasi ke User
+      // Relasi ke tabel User (Wajib ada agar nama muncul di laporan)
       Presensi.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
     }
   }
@@ -15,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    // HAPUS BAGIAN 'nama' DARI SINI
     checkIn: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -30,7 +28,13 @@ module.exports = (sequelize, DataTypes) => {
     longitude: {
       type: DataTypes.DECIMAL(11, 8),
       allowNull: true
+    },
+    // --- TAMBAHAN PENTING (Agar foto muncul) ---
+    buktiFoto: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
+    // ------------------------------------------
   }, {
     sequelize,
     modelName: 'Presensi',
